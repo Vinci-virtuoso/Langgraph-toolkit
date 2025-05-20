@@ -15,9 +15,9 @@ This project implements a modular **state machine** using **LangGraph** and **Fa
 
 2. **Install Dependencies**:
 
-   - Use Poetry as the dependency manager to install the required packages:
+   - Use UV as the dependency manager to install the required packages:
      ```bash
-     poetry install
+     uv pip install -e .
      ```
 
 3. **Run the FastAPI Server**:

@@ -1,28 +1,36 @@
-[tool.poetry]
+[project]
 name = "app"
 version = "0.1.0"
 description = ""
-authors = ["Markus Lang <markuslang@gmail.com>"]
 readme = "README.md"
+requires-python = ">=3.13.2"
+dependencies = [
+    "uvicorn>=0.32.0,<0.33.0",           # Updated from "uvicorn ^0.32.0"
+    "langchain>=0.3.7,<0.4.0",            # Updated from "langchain ^0.3.7"
+    "langgraph>=0.2.48,<0.3.0",           # Updated from "langgraph ^0.2.48"
+    "fastapi>=0.115.5,<0.116.0",          # Updated from "fastapi ^0.115.5"
+    "langchain-openai>=0.2.8,<0.3.0",     # Updated from "langchain-openai ^0.2.8"
+    "langchain-groq>=0.3.2",
+    "sentence_transformers >= 2.3.0",
+    "langchain-community>=0.3.7,<0.4.0",  # Updated from "langchain-community ^0.3.7"
+    "python-dotenv>=1.0.1,<2.0.0",        # Updated from "python-dotenv ^1.0.1"
+    "httpx>=0.25.2,<0.27",                  # For HTTP streaming support
+    "livekit-agents>=1.0.21",
+    "livekit-plugins-deepgram>=0.6.16",
+    "livekit-plugins-openai>=0.10.16",
+    "livekit-plugins-silero>=0.7.4",
+    "livekit-agents[elevenlabs]~=1.0"
+]
 
-[tool.poetry.dependencies]
-python = "^3.11,<3.13"
-uvicorn = "^0.32.0"
-langchain = "^0.3.7"
-langgraph = "^0.2.48"
-fastapi = "^0.115.5"
-langchain-openai = "^0.2.8"
-langchain-community = "^0.3.7"
-python-dotenv = "^1.0.1"
-
-
-[tool.poetry.group.dev.dependencies]
-pytest = "^8.3.3"
-isort = "^5.13.2"
-black = "^24.10.0"
-ruff = "^0.7.4"
-pytest-asyncio = "^0.24.0"
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.3,<9.0.0",              # Updated from "pytest ^8.3.3"
+    "isort>=5.13.2,<6.0.0",              # Updated from "isort ^5.13.2"
+    "black>=24.10.0,<25.0.0",            # Updated from "black ^24.10.0"
+    "ruff>=0.7.4,<0.8.0",                # Updated from "ruff ^0.7.4"
+    "pytest-asyncio>=0.24.0,<0.25.0",     # Updated from "pytest-asyncio ^0.24.0"
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"

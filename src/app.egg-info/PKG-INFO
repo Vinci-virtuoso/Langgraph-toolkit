@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: app
+Version: 0.1.0
+Requires-Python: >=3.13.2
+Description-Content-Type: text/markdown
+Requires-Dist: uvicorn<0.33.0,>=0.32.0
+Requires-Dist: langchain<0.4.0,>=0.3.7
+Requires-Dist: langgraph<0.3.0,>=0.2.48
+Requires-Dist: fastapi<0.116.0,>=0.115.5
+Requires-Dist: langchain-openai<0.3.0,>=0.2.8
+Requires-Dist: langchain-groq>=0.3.2
+Requires-Dist: sentence_transformers>=2.3.0
+Requires-Dist: langchain-community<0.4.0,>=0.3.7
+Requires-Dist: python-dotenv<2.0.0,>=1.0.1
+Requires-Dist: httpx<0.27,>=0.25.2
+Requires-Dist: livekit-agents>=1.0.21
+Requires-Dist: livekit-plugins-deepgram>=0.6.16
+Requires-Dist: livekit-plugins-openai>=0.10.16
+Requires-Dist: livekit-plugins-silero>=0.7.4
+Requires-Dist: livekit-agents[elevenlabs]~=1.0
+Provides-Extra: dev
+Requires-Dist: pytest<9.0.0,>=8.3.3; extra == "dev"
+Requires-Dist: isort<6.0.0,>=5.13.2; extra == "dev"
+Requires-Dist: black<25.0.0,>=24.10.0; extra == "dev"
+Requires-Dist: ruff<0.8.0,>=0.7.4; extra == "dev"
+Requires-Dist: pytest-asyncio<0.25.0,>=0.24.0; extra == "dev"
+
+# Software-Patterns-for-LLMs
+
+This project implements a modular **state machine** using **LangGraph** and **FastAPI**, designed to handle workflows through independent nodes. The nodes interact via a shared state, ensuring flexibility and scalability.
+
+---
+
+## Installation
+
+1. **Set OpenAI API Key**:
+
+   - Rename `.env.example` to `.env` and add your `OPENAI_API_KEY` to the `.env` file:
+     ```plaintext
+     OPENAI_API_KEY=your_openai_api_key
+     ```
+
+2. **Install Dependencies**:
+
+   - Use UV as the dependency manager to install the required packages:
+     ```bash
+     uv pip install -e .
+     ```
+
+3. **Run the FastAPI Server**:
+   - Start the server:
+     ```bash
+     poetry run uvicorn main:app --reload
+     ```
+
+---
