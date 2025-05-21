@@ -2,11 +2,18 @@ from dotenv import load_dotenv
 from langchain.schema import Document
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
+from langchain_community.embeddings import HuggingFaceBgeEmbeddings
 
+model_name = "BAAI/bge-large-en-v1.5"
+model_kwargs = {'device': 'cpu'}
+encode_kwargs = {'normalize_embeddings': True}
+hf = HuggingFaceBgeEmbeddings(
+    model_name=model_name,
+    model_kwargs=model_kwargs,
+    encode_kwargs=encode_kwargs
+)
 
 load_dotenv()
-
-embedding_function = OpenAIEmbeddings()
 
 docs = [
     Document(
@@ -27,4 +34,4 @@ docs = [
     ),
 ]
 
-db = Chroma.from_documents(docs, embedding_function)
+db = Chroma.from_documents(docs, hf)

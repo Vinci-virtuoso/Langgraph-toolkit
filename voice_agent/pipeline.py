@@ -12,6 +12,7 @@ from livekit.agents import (
 from livekit.plugins import silero
 from voice_agent.agent import setup_voice_agent
 
+
 load_dotenv(dotenv_path=".env")
 logger = logging.getLogger("voice-agent")
 

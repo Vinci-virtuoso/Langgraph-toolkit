@@ -1,9 +1,10 @@
+import os
 import logging
 from livekit.agents import Agent, AgentSession
-from livekit.plugins import deepgram, openai, silero
+from livekit.plugins import deepgram, openai, silero, elevenlabs
 from voice_agent.langgraph_adapter import LangGraphAdapter
 from src.app.workflows.rag_workflow import create_rag_graph
-from langgraph.pregel.remote import RemoteGraph
+
 
 logger = logging.getLogger(__name__)
 
@@ -14,7 +15,7 @@ def setup_voice_agent(thread_id: str):
     """
     # Compile the LangGraph workflow from rag_workflow.py
     compiled_graph = create_rag_graph()
-    graph = RemoteGraph("agent", url="http://localhost:2024")
+    
     # Wrap the compiled graph with LangGraphAdapter, passing configuration as needed
     adapter = LangGraphAdapter(compiled_graph, config={"configurable": {"thread_id": thread_id}})
     
@@ -23,7 +24,13 @@ def setup_voice_agent(thread_id: str):
         vad=silero.VAD.load(),
         stt=deepgram.STT(),
         llm=adapter,
-        tts=openai.TTS(),
+        tts=elevenlabs.TTS(
+        model="eleven_turbo_v2",
+        voice_id="PEyWCmLPt74vpHWLv3Fo",
+        api_key=os.getenv("ELEVENLABS_API_KEY"),     
+        streaming_latency=2,  
+        chunk_length_schedule=[60, 90, 120, 150],      
+    ),
     )
     
     # Create an Agent with clear instructions
